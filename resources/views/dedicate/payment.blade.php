@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container py-5" class="payment-page">
+<div class="container py-5 payment-page">
     <div class="payment-box shadow-sm p-4 rounded bg-white">
     <!-- Header -->
     <div class="d-flex justify-content-between align-items-center mb-3">
@@ -44,7 +44,7 @@
     </div>
 
     <!-- Button -->
-    <button class="btn btn-teal w-100 mt-4 py-3" id="pay-btn">
+    <button type="button" class="btn btn-teal w-100 mt-4 py-3" id="pay-btn">
         Confirm and Pay
     </button>
 
@@ -58,6 +58,8 @@
 @section('scripts')
 <script src="https://js.stripe.com/v3/"></script>
 <script>
+document.addEventListener("DOMContentLoaded", function () {
+
     const stripe = Stripe("{{ config('services.stripe.key') }}");
 
     const options = {
@@ -71,11 +73,13 @@
 
     const form = document.getElementById("payment-form");
     const payBtn = document.getElementById("pay-btn");
+    const messageEl = document.getElementById("payment-message");
 
-    elements.on('ready', () => payBtn.disabled = false);
+    elements.on('ready', () => {
+        payBtn.disabled = false;
+    });
 
-    form.addEventListener("submit", async (e) => {
-        e.preventDefault();
+    payBtn.addEventListener("click", async () => {
         payBtn.disabled = true;
         payBtn.innerText = "Processing...";
 
@@ -87,10 +91,14 @@
         });
 
         if (result.error) {
-            document.getElementById("payment-message").innerText = result.error.message;
+            messageEl.style.display = 'block';
+            messageEl.innerText = result.error.message;
             payBtn.disabled = false;
-            payBtn.innerText = "Pay $180";
+            payBtn.innerText = "Confirm and Pay";
         }
     });
+
+});
 </script>
 @endsection
+

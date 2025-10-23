@@ -74,7 +74,6 @@
 @endsection
 @section('scripts')
 <script>
-console.log('FORM SCRIPT LOADED ✅');
 document.addEventListener('DOMContentLoaded', function () {
     const form = document.getElementById('dedication-form');
     const submitBtn = document.getElementById('next-btn');

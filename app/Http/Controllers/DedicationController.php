@@ -61,8 +61,8 @@ class DedicationController extends Controller
         ]));
 
         // In a real integration, create a Stripe PaymentIntent and return client secret
-        // For now, send user to payment page with dedication id
-        return redirect()->route('dedicate.payment', ['dedication' => $dedication->id]);
+        // For now, send user to payment page using the model so route-model-binding uses the uuid
+        return redirect()->route('dedicate.payment', $dedication);
     }
 
     public function payment(Dedication $dedication)

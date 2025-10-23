@@ -21,7 +21,7 @@ Route::get('/', function(){ return redirect('/dedicate'); });
 Route::get('/dedicate', [DedicationController::class, 'landing'])->name('dedicate.landing');
 Route::get('/dedicate/details', [DedicationController::class, 'create'])->name('dedicate.details');
 Route::post('/dedicate/details', [DedicationController::class, 'store'])->name('dedicate.store');
-Route::get('/dedicate/payment/{dedication}', [DedicationController::class, 'payment'])->name('dedicate.payment');
+Route::get('/dedicate/payment/{dedication:uuid}', [DedicationController::class, 'payment'])->name('dedicate.payment');
 Route::get('/dedicate/success', [DedicationController::class, 'success'])->name('dedicate.success');
 
 // Stripe webhook (no CSRF)

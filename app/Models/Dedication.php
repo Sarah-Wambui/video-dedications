@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Str;
 
 class Dedication extends Model
 {
@@ -23,12 +24,34 @@ class Dedication extends Model
         'order_id',
         'metadata',
         'amount_cents',
+        'uuid',
     ];
 
     protected $casts = [
         'consent_spelling' => 'boolean',
         'metadata' => 'array',
+        'uuid' => 'string',
     ];
+
+    /**
+     * Auto-generate uuid for new records.
+     */
+    protected static function booted()
+    {
+        static::creating(function ($model) {
+            if (empty($model->uuid)) {
+                $model->uuid = (string) Str::uuid();
+            }
+        });
+    }
+
+    /**
+     * Use uuid for route model binding by default.
+     */
+    public function getRouteKeyName()
+    {
+        return 'uuid';
+    }
 
     public static function statuses(): array
     {

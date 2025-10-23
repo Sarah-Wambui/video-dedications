@@ -306,7 +306,7 @@ img, video {
 .btn-teal:hover {
     opacity: 0.9;
     color: #fff;
-    background: #1eb8b1;
+    background: var(--brand-teal);
     color: #fff;
 }
 .card-input {
@@ -330,4 +330,38 @@ img, video {
 }
 .summary-row:last-child {
     border-bottom: none;
+}
+
+/* Responsive tweaks for payment page */
+@media (max-width: 900px) {
+    .payment-box {
+        width: 40rem;
+    }
+}
+
+@media (max-width: 640px) {
+    .payment-box {
+        width: 95%;
+        padding: 1rem;
+    }
+
+    /* Stack summary rows vertically on small screens for readability */
+    .summary-row {
+        display: flex;
+        flex-direction: row; /* keep label and value on same line */
+        align-items: center;
+        justify-content: space-between;
+        gap: .5rem;
+        padding: .5rem 0;
+        flex-wrap: wrap; /* allow wrapping on very small screens */
+    }
+
+    .card-input {
+        padding: .75rem;
+    }
+
+    .btn-teal {
+        padding-top: .75rem;
+        padding-bottom: .75rem;
+    }
 }
