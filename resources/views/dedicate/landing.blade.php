@@ -12,7 +12,7 @@
                       For a refuah, in memory, or in honor—your dedication becomes light in someone’s feed today.</p>
                     <p class="par-2">This isn’t an ad. It’s a mitzvah in motion. Your dedication appears on a video and helps us share Torah and kindness further.</p>
                     <div class="mt-8 d-flex justify-content-center">
-                        <a class="hero-link" href="#">
+                        <a class="hero-link" href="{{ route('dedicate.details') }}">
                             <button class="btn hero-btn" tabindex="0">Dedicate a Video →</button>
                         </a>
                     </div>      
@@ -67,6 +67,8 @@
         <p class="text-center italic max-w-3xl mx-auto text-[var(--brand-teal)] text-lg">"A small light can push away much darkness."</p>
     </div>
 </section>
+
+@include('shared.footer')
 
 
 @endsection

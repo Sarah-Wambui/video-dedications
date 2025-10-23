@@ -60,6 +60,16 @@
     --font-lato: 'Lato', system-ui, sans-serif;
     --radius: .5rem;
 }
+/* Enforce consistent typography: Open Sans for body, Cinzel for headings */
+body {
+    font-family: 'Open Sans', var(--font-sans), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    color: var(--brand-text);
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-cinzel);
+}
+
 a{
     color: var(--brand-teal) !important;
     transition: opacity 0.2s ease;
@@ -111,7 +121,6 @@ img, video {
 }
 .main{
     background-color: var(--brand-cream);
-    padding-bottom: 175px; /* equal to footer height */
     overflow-y: auto;
     min-height: 100vh;
 }
@@ -249,9 +258,9 @@ img, video {
     margin-top: 0.75rem;
 }
 .landing-quote{
-   background: white;
-   border-top: 1px solid var(--brand-cream-3);
-   border-bottom: 1px solid var(--brand-cream-3);
+    background: white;
+    border-top: 1px solid var(--brand-cream-3);
+    border-bottom: 1px solid var(--brand-cream-3);
     padding-top: 2rem;
     padding-bottom: 2rem;
 }
@@ -268,8 +277,8 @@ img, video {
     width: 100%;
 }
 .footer-btn{
-    background: #FFFFFF;
-    color: var(--brand-teal);
+    background: var(--brand-teal);
+    color: white;
     transition: all 0.2s ease;
     border-radius: 14px;
     display: inline-flex;
@@ -284,6 +293,6 @@ img, video {
     font-size: 25px;
 }
 .footer-btn:hover{
-    background: #FFFFFF;
-    color: var(--brand-teal);
+    background: var(--brand-teal);
+    color: white;
 }

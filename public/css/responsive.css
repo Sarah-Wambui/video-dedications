@@ -1,0 +1,328 @@
+/* Responsive adjustments for landing page
+   Breakpoints:
+   - Large tablets / small desktops: 1024px
+   - Tablets / landscape phones: 768px
+   - Small phones: 480px
+*/
+
+/* Ensure main content doesn't hide behind fixed footer */
+@media (max-width: 768px) {
+	.main {
+		padding-bottom: 120px; /* accommodate fixed footer */
+	}
+}
+
+/* Large / medium screens */
+@media (max-width: 1024px) {
+	.hero{
+		height: 80vh;
+		background-position: center 30%;
+	}
+	.her0-container{
+		padding-top: 160px;
+	}
+	.hero-heading{
+		font-size: 3rem;
+	}
+	.lead{
+		font-size: 1.15rem;
+		max-width: 40rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	.par-2{
+		max-width: 36rem;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	.matter-grid{
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	.works-grids{
+		grid-template-columns: repeat(2, minmax(0, 1fr));
+		gap: 1rem;
+	}
+	.navbar .nav-link{
+		font-size: 18px;
+	}
+}
+
+/* Tablets and larger phones */
+@media (max-width: 768px) {
+	.hero{
+		height: 72vh;
+		background-position: center 35%;
+	}
+	.her0-container{
+		padding-top: 120px;
+	}
+	.hero-heading{
+		font-size: 2.4rem;
+		line-height: 1.05;
+		text-align: center;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	.lead{
+		font-size: 1rem;
+		line-height: 1.5rem;
+		max-width: 30rem;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+	.par-2{
+		font-size: 0.98rem;
+		max-width: 30rem;
+		margin-left: auto;
+		margin-right: auto;
+		text-align: center;
+	}
+	.hero-btn{
+		width: 100%;
+		padding: 0.85rem 1rem;
+		font-size: 18px;
+		border-radius: 12px;
+	}
+	.matter-grid, .works-grids{
+		grid-template-columns: 1fr;
+	}
+	.landing-quote{
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+	.footer{
+		font-size: 1rem;
+		padding: 16px 12px;
+	}
+	.footer-btn{
+		font-size: 18px;
+		padding-left: 1rem;
+		padding-right: 1rem;
+	}
+}
+
+/* Small phones */
+@media (max-width: 480px) {
+	.hero{
+		height: 68vh;
+		background-position: center 45%;
+	}
+	.her0-container{
+		padding-top: 90px;
+	}
+	.hero-heading{
+		font-size: 1.9rem;
+		padding-left: 0.75rem;
+		padding-right: 0.75rem;
+	}
+	.lead{
+		font-size: 0.95rem;
+		max-width: 22rem;
+	}
+	.par-2{
+		font-size: 0.95rem;
+		max-width: 22rem;
+	}
+	.hero-btn{
+		font-size: 16px;
+		padding: 0.75rem 0.75rem;
+		width: 100%;
+		display: block;
+	}
+	.navbar .nav-link{
+		font-size: 16px;
+	}
+
+	/* Reduce fixed footer footprint for very small screens */
+	.footer{
+		font-size: 0.95rem;
+		padding: 12px 10px;
+	}
+	.footer-btn{
+		font-size: 16px;
+		padding-left: 0.75rem;
+		padding-right: 0.75rem;
+	}
+}
+
+/* Utility: prevent overly wide text on small screens */
+@media (max-width: 768px) {
+	.lead, .par-2, .matter-card-text, .how-it-works-text{
+		word-break: break-word;
+	}
+}
+
+/* Form card styles for dedication form */
+.dedication-card{
+	background: #ffffff;
+	border-radius: 12px;
+	box-shadow: 0 8px 20px rgba(0,0,0,0.06);
+	padding-left: 1rem;
+    padding-right: 1rem;
+	max-width: 48rem;
+	margin-left: auto;
+	margin-right: auto;
+}
+.dedication-form{
+    padding: 2rem;
+}
+
+/* Title and page spacing */
+.dedication-title{
+	color: var(--brand-teal);
+	font-family: var(--font-cinzel), serif;
+	font-size: 1.75rem;
+	margin-bottom: 0.25rem;
+	text-align: left;
+}
+.dedication-subcopy{
+	opacity: 0.8;
+	font-size: 1rem;
+	line-height: 1.5rem;
+	margin-top: 0.5rem;
+	margin-bottom: 1rem;
+}
+.dedication-page{
+	padding-top: 6rem; /* increased top padding to avoid navbar overlap */
+	padding-bottom: 4rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+}
+
+/* Align the header area with the dedication card width and centering */
+.dedication-header{
+	max-width: 720px;
+	margin-left: auto;
+	margin-right: auto;
+	/* horizontal padding removed to align with card edges */
+	padding-left: 0;
+	padding-right: 0;
+}
+.dedication-form-grid{
+	display: grid;
+	grid-template-columns: 1fr 1fr;
+	gap: 1rem;
+}
+.dedication-form-field{
+	display: flex;
+	flex-direction: column;
+	padding: 1rem 0; /* user requested padding */
+}
+.dedication-form-field label{
+	margin-bottom: 6px;
+	font-weight: 600;
+	color: var(--brand-teal); /* #226e72 */
+}
+
+/* Ensure all labels on the dedication page follow the same styling */
+.dedication-page label{
+	margin-bottom: 0.5rem;
+	font-weight: 500;
+	color: var(--brand-teal);
+}
+.dedication-form-field .input,
+.dedication-form-field input,
+.dedication-form-field select,
+.dedication-form-field textarea{
+	border: 1px solid #E7A94B; /* gold border */
+	border-radius: 8px;
+	padding: 0.625rem 1rem;
+	font-size: 16px;
+	background: #fff;
+	transition: border-color 0.12s ease, box-shadow 0.12s ease;
+}
+
+/* Focus state: teal */
+.dedication-form-field .input:focus,
+.dedication-form-field input:focus,
+.dedication-form-field select:focus,
+.dedication-form-field textarea:focus{
+	border-color: var(--brand-teal); /* #226e72 */
+	outline: none;
+	box-shadow: 0 0 0 4px rgba(34,110,114,0.08);
+}
+
+/* Ensure select (dropdown) has comfortable padding */
+.dedication-form-field select{
+	padding: 12px 14px;
+}
+.dedication-textarea{
+	min-height: 140px;
+	resize: vertical;
+}
+.dedication-actions{
+	display: flex;
+	gap: 12px;
+	align-items: center;
+}
+.btn-back{
+	display: inline-flex;
+	align-items: center;
+	gap: 8px;
+	background: transparent;
+	border: 1px solid rgba(36,49,48,0.08);
+	padding: 10px 5rem; /* increased horizontal padding */
+	border-radius: 10px;
+	cursor: pointer;
+	text-decoration: none; /* remove underline */
+}
+.btn-back:hover{ text-decoration: none; }
+.btn-continue{
+	flex: 1; /* take remaining width */
+	background: var(--brand-teal);
+	color: white;
+	border: none;
+	padding: 10px 16px;
+	border-radius: 10px;
+	cursor: pointer;
+}
+.btn-continue:disabled{
+	opacity: 0.6;
+	cursor: not-allowed;
+	/* keep visual color when disabled */
+	background: var(--brand-teal);
+	color: white;
+}
+
+/* While submitting, ensure the button shows active style but remains non-interactive */
+.btn-continue.submitting{
+	opacity: 1;
+	background: var(--brand-teal) !important;
+	color: white !important;
+	cursor: not-allowed;
+	box-shadow: 0 6px 18px rgba(34,110,114,0.12);
+}
+.confirm-spelling{
+    --tw-space-y-reverse: 0;
+    margin-top: calc(1.5rem * calc(1 - var(--tw-space-y-reverse)));
+    margin-bottom: calc(1.5rem * var(--tw-space-y-reverse));
+    gap: 0.75rem;
+    align-items: flex-start;
+}
+
+/* Ensure flex children can shrink properly and fill remaining width */
+.dedication-actions .btn-continue{
+	min-width: 0;
+	display: inline-flex;
+	align-items: center;
+	justify-content: center;
+}
+
+@media (max-width: 768px){
+	.dedication-card{
+		padding: 2rem; /* keep 2rem on smaller screens */
+		margin: 0 16px;
+	}
+	.dedication-form-grid{
+		grid-template-columns: 1fr;
+	}
+	.dedication-actions{
+		flex-direction: column-reverse;
+		align-items: stretch;
+	}
+	.btn-back{ width: 100%; }
+	.btn-continue{ width: 100%; }
+}
+

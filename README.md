@@ -65,3 +65,34 @@ If you discover a security vulnerability within Laravel, please send an e-mail t
 
 The Laravel framework is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
 # video-dedications
+
+## Dedication flow (new)
+
+This project now includes a 4-step dedication flow:
+
+- Landing: `/dedicate` — warm welcome and CTA
+- Details: `/dedicate/details` — donor form with validation
+- Payment: `/dedicate/payment/{dedication}` — Stripe payment (placeholder)
+- Success: `/dedicate/success` — confirmation and receipt
+
+Files of interest:
+
+- `app/Models/Dedication.php` — Dedication model
+- `database/migrations/*_create_dedications_table.php` — migration
+- `app/Http/Controllers/DedicationController.php` — flow controller
+- `app/Http/Controllers/StripeWebhookController.php` — webhook handler
+- `app/Mail/DonorReceipt.php`, `app/Mail/AdminNotification.php` — mailables
+- `resources/views/dedicate/*` — blade views
+
+Stripe setup (recommended):
+
+1. Add the following to your `.env`:
+
+	- STRIPE_SECRET=
+	- STRIPE_WEBHOOK_SECRET=
+
+2. Create a PaymentIntent for $180 USD on the backend when loading the payment page and return the client secret to the view. Attach metadata including `dedication_id`.
+
+3. Configure a Stripe webhook endpoint to POST to `/webhook/stripe` and set the signing secret in `STRIPE_WEBHOOK_SECRET`.
+
+The current implementation includes placeholders for Stripe client integration. Implement PaymentIntent creation and Stripe Elements mounting in `DedicationController::payment` view.
