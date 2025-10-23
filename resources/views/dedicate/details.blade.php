@@ -23,11 +23,11 @@
             <div class="dedication-form-grid">
                 <div class="dedication-form-field">
                     <label for="email">Email</label>
-                    <input id="email" name="email" type="email" required class="input" />
+                    <input id="email" name="email" type="email" class="input" required />
                 </div>
                 <div class="dedication-form-field">
                     <label for="phone">Phone</label>
-                    <input id="phone" name="phone" class="input" placeholder="E.164 preferred" />
+                    <input id="phone" name="phone" class="input" required />
                 </div>
             </div>
 
@@ -71,114 +71,67 @@
     </div>
 </div>
 
-@push('scripts')
+@endsection
+@section('scripts')
 <script>
-document.addEventListener("DOMContentLoaded", function () {
-    const requiredFields = [
-        "first_name",
-        "last_name",
-        "email",
-        "honoree_name"
-    ];
+console.log('FORM SCRIPT LOADED ✅');
+document.addEventListener('DOMContentLoaded', function () {
+    const form = document.getElementById('dedication-form');
+    const submitBtn = document.getElementById('next-btn');
+    const checkbox = document.getElementById('consent_spelling');
+    const dedicationType = document.getElementById('dedication_type');
+    const otherType = document.getElementById('other_type');
 
-    const nextBtn = document.getElementById("next-btn");
-    const checkbox = document.getElementById("consent_spelling");
-    const dedicationType = document.getElementById("dedication_type");
-    const otherType = document.getElementById("other_type");
-    const form = document.getElementById("dedication-form");
-
-    function countWords(s){
-        if(!s) return 0;
-        return s.trim().split(/\s+/).filter(Boolean).length;
-    }
-
-    function isEmailValid(email){
-        return /\S+@\S+\.\S+/.test(email);
-    }
-
-    function normalizePhone(v){
-        if(!v) return '';
-        return v.replace(/[^+0-9]/g,'');
-    }
-
-    // Store original button text
-    const originalBtnText = nextBtn.textContent;
-
-    function validateForm() {
-        let isValid = true;
-
-        // gather values
-        const first = (document.getElementById('first_name')?.value || '').trim();
-        const last = (document.getElementById('last_name')?.value || '').trim();
-        const email = (document.getElementById('email')?.value || '').trim();
-        const phone = (document.getElementById('phone')?.value || '').trim();
-        const hon = (document.getElementById('honoree_name')?.value || '').trim();
-        const note = (document.getElementById('short_note')?.value || '').trim();
-
-    // Required fields
-    if(!first) isValid = false;
-    // last name optional
-    if(!hon) isValid = false;
-
-        // Email
-        if(!isEmailValid(email)) isValid = false;
-
-    // Phone: optional. If provided, require at least 7 digits after normalization
-    const normalizedPhone = normalizePhone(phone).replace(/[^0-9]/g,'');
-    if(phone && normalizedPhone.length < 7) isValid = false;
-
-        // Note word count <= 20
-        const wordCountValue = countWords(note);
-        if(wordCountValue > 20) isValid = false;
-
-        // If "Other" selected, require otherType
-        if(dedicationType.value === 'Other'){
-            if(!otherType.value.trim()) isValid = false;
-        }
-
-        // Checkbox must be checked
-        if(!checkbox.checked) isValid = false;
-
-        nextBtn.disabled = !isValid;
-        // restore text when becoming enabled (and not submitting)
-        if(!nextBtn.disabled){
-            nextBtn.textContent = originalBtnText;
-            nextBtn.classList.remove('disabled');
+    function updateOtherVisibility() {
+        if (dedicationType.value === 'Other') {
+            otherType.style.display = 'block';
+            otherType.setAttribute('required', 'required');
         } else {
-            nextBtn.classList.add('disabled');
+            otherType.style.display = 'none';
+            otherType.removeAttribute('required');
+            otherType.value = '';
         }
-        return isValid;
     }
 
-    // Show/hide other_type input
-    dedicationType.addEventListener("change", function () {
-        otherType.style.display = this.value === "Other" ? "block" : "none";
-        validateForm();
-    });
-
-    // Live validate all fields + checkbox
-    form.querySelectorAll("input, select, textarea").forEach(input => {
-        input.addEventListener("input", validateForm);
-        input.addEventListener("change", validateForm);
-    });
-
-    // On submit: run validation, show saving state and prevent double-submit
-    form.addEventListener('submit', function(e){
-        const ok = validateForm();
-        if(!ok){
-            // prevent submit if invalid
-            e.preventDefault();
-            return;
+    function isFormValid() {
+        const requiredFields = form.querySelectorAll('[required]');
+        for (let field of requiredFields) {
+            const val = (field.value || '').trim();
+            if (!val) return false;
         }
-        // mark submitting: disable the button and show Saving...
-        nextBtn.disabled = true;
-        nextBtn.classList.add('submitting');
-        nextBtn.textContent = 'Saving...';
-        // allow form to submit normally (server will redirect to payment page)
+        if (!checkbox.checked) return false;
+        return true;
+    }
+
+    function refreshButtonState() {
+        submitBtn.disabled = !isFormValid();
+    }
+
+    // Attach input listeners
+    form.querySelectorAll('input, select, textarea').forEach(el => {
+        el.addEventListener('input', () => {
+            if (el === dedicationType) updateOtherVisibility();
+            refreshButtonState();
+        });
+        el.addEventListener('change', () => {
+            if (el === dedicationType) updateOtherVisibility();
+            refreshButtonState();
+        });
     });
+
+    checkbox.addEventListener('change', refreshButtonState);
+
+    // On submit → show "Saving..." and allow form to submit
+    form.addEventListener('submit', function () {
+        submitBtn.disabled = true;
+        submitBtn.classList.add('submitting');
+        submitBtn.textContent = 'Saving...';
+    });
+
+    // Initialize on load
+    updateOtherVisibility();
+    refreshButtonState();
 });
 </script>
-
-@endpush
 
 @endsection

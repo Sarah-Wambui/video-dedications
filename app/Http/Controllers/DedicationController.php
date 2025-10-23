@@ -39,6 +39,20 @@ class DedicationController extends Controller
             return is_string($v) ? trim($v) : $v;
         }, $data);
 
+        // Ensure checkbox/boolean values are stored as integers (DB expects tinyint)
+        if (array_key_exists('consent_spelling', $data)) {
+            $val = $data['consent_spelling'];
+            // common values: 'on', '1', 1, true
+            $data['consent_spelling'] = ($val === 'on' || $val === '1' || $val === 1 || $val === true) ? 1 : 0;
+        } else {
+            $data['consent_spelling'] = 0;
+        }
+
+        // If dedication type isn't Other, ensure other_type is null
+        if (isset($data['dedication_type']) && $data['dedication_type'] !== 'Other') {
+            $data['other_type'] = null;
+        }
+
         // store draft
         $dedication = Dedication::create(array_merge($data, [
             'status' => 'pending_payment',
@@ -54,7 +68,25 @@ class DedicationController extends Controller
     public function payment(Dedication $dedication)
     {
         // Page 3: show summary and payment element
-        return view('dedicate.payment', compact('dedication'));
+        $clientSecret = null;
+
+        // Try to create a PaymentIntent if stripe-php is installed and STRIPE_SECRET is set.
+        try {
+            if (class_exists('\Stripe\StripeClient') && config('services.stripe.secret')) {
+                $stripe = new \Stripe\StripeClient(config('services.stripe.secret'));
+                $intent = $stripe->paymentIntents->create([
+                    'amount' => $dedication->amount_cents ?? 18000,
+                    'currency' => 'usd',
+                    'metadata' => array_merge($dedication->metadata ?? [], ['dedication_id' => $dedication->id]),
+                ]);
+                $clientSecret = $intent->client_secret ?? null;
+            }
+        } catch (\Throwable $e) {
+            // Log but don't break the page; the view will show instructions to install stripe-php
+            Log::warning('Stripe PaymentIntent creation failed: ' . $e->getMessage());
+        }
+
+        return view('dedicate.payment', compact('dedication', 'clientSecret'));
     }
 
     public function success(Request $request)

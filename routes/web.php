@@ -16,9 +16,8 @@ use App\Http\Controllers\LandingController;
 */
 
 
-// Route::get('/', [LandingController::class, 'index'])->name('dedicate.landing');
-
 // Dedication flow
+Route::get('/', function(){ return redirect('/dedicate'); });
 Route::get('/dedicate', [DedicationController::class, 'landing'])->name('dedicate.landing');
 Route::get('/dedicate/details', [DedicationController::class, 'create'])->name('dedicate.details');
 Route::post('/dedicate/details', [DedicationController::class, 'store'])->name('dedicate.store');

@@ -78,7 +78,6 @@ img, video {
     max-width: 100%;
     height: auto;
     display: block;
-    vertical-align: middle;
     object-fit: contain;
 }
 .navbar-brand-container{
@@ -295,4 +294,40 @@ img, video {
 .footer-btn:hover{
     background: var(--brand-teal);
     color: white;
+}
+.btn-teal {
+    background: var(--brand-teal);
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: 0.3s;
+}
+.btn-teal:hover {
+    opacity: 0.9;
+    color: #fff;
+    background: #1eb8b1;
+    color: #fff;
+}
+.card-input {
+    min-height: 50px;
+    display: flex;
+    align-items: center;
+}
+
+/* Payment box sizing */
+.payment-box {
+    width: 50rem; /* fixed desired width */
+    max-width: 100%; /* responsive fallback on small screens */
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 3rem;
+}
+/* Summary rows inside payment page */
+.summary-row {
+    font-family: 'Open Sans', var(--font-sans), system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+    padding: 0.6rem 0; /* add vertical spacing */
+}
+.summary-row:last-child {
+    border-bottom: none;
 }
