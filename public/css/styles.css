@@ -365,3 +365,93 @@ img, video {
         padding-bottom: .75rem;
     }
 }
+
+/* Success page styles */
+.success-card-wrapper {
+    width: 70rem; /* wrapper larger than card */
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 1.25rem;
+}
+
+.success-text {
+    width: 48rem; /* wider than the card */
+    max-width: 100%;
+    font-family: 'Open Sans', var(--font-sans);
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+/* Increase typography scale for success text */
+.success-text {
+    font-size: 1.0625rem; /* 17px */
+}
+.success-text h3 {
+    font-family: var(--font-cinzel);
+    font-size: 1.75rem; /* 28px */
+    line-height: 1.1;
+    margin-bottom: 0.5rem;
+}
+
+
+.success-card {
+    width: 40rem; /* requested card width */
+    max-width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+/* Make card body larger and readable */
+.success-card .card-body {
+    font-family: 'Open Sans', var(--font-sans);
+    font-size: 1.0625rem; /* 17px */
+    line-height: 1.6;
+    color: var(--brand-text);
+}
+.success-card .card-body p {
+    margin-bottom: 0.6rem;
+}
+.success-card .card-body p strong {
+    font-weight: 700;
+}
+
+/* Button styles requested */
+.btn-custom {
+    padding: 1.5rem 0.75rem;
+    border-radius: 6px;
+    font-family: 'Open Sans', var(--font-sans);
+    font-weight: 600;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.5rem;
+}
+
+.btn-copy {
+    background: var(--brand-teal);
+    color: #fff;
+    border: none;
+}
+
+.btn-add {
+    background: #fff;
+    color: var(--brand-teal);
+    border: 2px solid var(--brand-teal);
+    text-decoration: none;
+}
+
+.btn-home {
+    background: var(--brand-cream);
+    color: var(--brand-teal);
+    border: 1px solid rgba(34,110,114,0.06);
+    text-decoration: none;
+}
+
+.btn-home svg {
+    color: var(--brand-teal);
+}
