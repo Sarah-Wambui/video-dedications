@@ -366,6 +366,18 @@ img, video {
     }
 }
 
+/* Utility to offset content below the fixed navbar on pages that need it */
+.page-offset {
+    /* use margin-top so the container sits below the fixed navbar */
+    margin-top: 80px; /* matches navbar area used elsewhere */
+}
+
+@media (max-width: 640px) {
+    .page-offset {
+        margin-top: 64px;
+    }
+}
+
 /* Success page styles */
 .success-card-wrapper {
     width: 70rem; /* wrapper larger than card */
@@ -454,4 +466,73 @@ img, video {
 
 .btn-home svg {
     color: var(--brand-teal);
+}
+
+/* Responsive adjustments for the success page */
+@media (max-width: 900px) {
+    .success-card-wrapper {
+        width: 48rem;
+        padding: 0 1rem;
+    }
+
+    .success-text {
+        width: 100%;
+        padding: 0 1rem;
+    }
+
+    .success-card {
+        width: 36rem;
+    }
+}
+
+@media (max-width: 640px) {
+    /* Make wrapper full-bleed with comfortable padding */
+    .success-card-wrapper {
+        width: 100%;
+        padding: 0 1rem;
+        gap: 1rem;
+    }
+
+    /* Success text should be full width and slightly smaller on phones */
+    .success-text {
+        width: 100%;
+        font-size: 1rem;
+        padding: 0 0.5rem;
+    }
+
+    /* Card should fill the available width on small screens */
+    .success-card {
+        width: 100%;
+        margin-left: 0;
+        margin-right: 0;
+    }
+
+    .success-card .card-body {
+        padding: 1rem;
+    }
+
+    /* Make action buttons stack vertically and go full-width */
+    .success-card .actions {
+        flex-direction: column;
+        align-items: stretch;
+        gap: 0.75rem;
+    }
+
+    .btn-custom {
+        padding: 0.75rem 0.75rem;
+        width: 100%;
+        justify-content: center;
+    }
+
+    /* Reduce visual weight of the copy button on small screens */
+    .btn-copy {
+        padding: 0.75rem 0.75rem;
+    }
+
+    /* Ensure the home link's inline svg doesn't push layout */
+    .btn-home svg {
+        width: 16px;
+        height: 16px;
+        margin-right: 0.5rem;
+    }
 }

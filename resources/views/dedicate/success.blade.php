@@ -1,7 +1,7 @@
 @extends('layouts.app')
 
 @section('content')
-<div class="container d-flex justify-content-center align-items-center min-vh-100 py-4">
+<div class="container page-offset d-flex justify-content-center align-items-center min-vh-100 py-4">
     <div class="p-4 success-card-wrapper">
 
         <!-- Green Tick Circle -->
@@ -33,7 +33,7 @@
                     <button id="copy-share" class="btn-copy btn-custom">Copy share text</button>
                 </div>
 
-                <div class="mt-4 d-flex gap-2 justify-content-center">
+                <div class="mt-4 d-flex gap-2 justify-content-center actions">
                     <a href="{{ route('dedicate.details') }}" class="btn-add btn-custom">Add another dedication</a>
                     <a href="/" class="btn-home btn-custom d-flex align-items-center" aria-label="Return to Home">
                         <!-- Home SVG -->
