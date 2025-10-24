@@ -13,6 +13,8 @@ class StripeWebhookController extends Controller
 {
     public function handle(Request $request)
     {
+        Log::info('Stripe webhook received', ['payload' => $request->all()]);
+        
         // For now, accept JSON and look for payment_intent.succeeded
         $payload = $request->all();
         $eventType = $payload['type'] ?? null;

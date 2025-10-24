@@ -79,6 +79,9 @@ class DedicationController extends Controller
                     'currency' => 'usd',
                     'metadata' => array_merge($dedication->metadata ?? [], ['dedication_id' => $dedication->id]),
                 ]);
+
+                Log::info('PaymentIntent created', ['dedication_id' => $dedication->id, 'intent_id' => $intent->id]);
+                
                 $clientSecret = $intent->client_secret ?? null;
             }
         } catch (\Throwable $e) {
