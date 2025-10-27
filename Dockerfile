@@ -39,7 +39,8 @@ WORKDIR /var/www
 # Copy app from build stage
 COPY --from=build /var/www /var/www
 
-# Copy custom Nginx config
+# Remove default Nginx config and add your own
+RUN rm -f /etc/nginx/conf.d/default.conf /etc/nginx/sites-enabled/default
 COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Permissions
