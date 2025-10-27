@@ -102,4 +102,9 @@ class DedicationController extends Controller
 
     }
 
+    public function videos()
+    {
+        return view('dedicate.videos');
+    }
+
 }

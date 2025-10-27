@@ -8,4 +8,6 @@ class LandingController extends Controller
     {
         return view('dedicate.landing');
     }
+
+    
 }

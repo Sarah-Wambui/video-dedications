@@ -18,7 +18,7 @@
           <a class="nav-link active" aria-current="page" href="{{ route('dedicate.landing') }}">Dedicate</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link" href="#">Gallery</a>
+          <a class="nav-link" href="{{ route('videos') }}">Videos</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="#">Admin</a>

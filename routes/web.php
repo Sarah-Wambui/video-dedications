@@ -4,6 +4,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\DedicationController;
 use App\Http\Controllers\StripeWebhookController;
 use App\Http\Controllers\LandingController;
+use App\Http\Controllers\VideoController;
 /*
 |--------------------------------------------------------------------------
 | Web Routes
@@ -23,6 +24,7 @@ Route::get('/dedicate/details', [DedicationController::class, 'create'])->name('
 Route::post('/dedicate/details', [DedicationController::class, 'store'])->name('dedicate.store');
 Route::get('/dedicate/payment/{dedication:uuid}', [DedicationController::class, 'payment'])->name('dedicate.payment');
 Route::get('/dedicate/success', [DedicationController::class, 'success'])->name('dedicate.success');
+Route::get('/videos', [VideoController::class, 'index'])->name('videos');
 
 // Stripe webhook (no CSRF)
 Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('webhook.stripe');
