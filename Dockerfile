@@ -19,6 +19,13 @@ WORKDIR /var/www
 COPY composer.json composer.lock ./
 RUN composer install --no-dev --no-interaction --no-scripts --prefer-dist --optimize-autoloader
 
+# -----------------------------
+# ✅ Frontend build step (Vite / Mix)
+# -----------------------------
+COPY package.json package-lock.json ./
+RUN npm install && npm run build
+# ----------------------------
+
 # Copy the rest of the app
 COPY . .
 
