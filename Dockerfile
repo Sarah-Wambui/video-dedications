@@ -51,4 +51,5 @@ ENV PORT=8080
 EXPOSE 8080
 
 # Start Nginx and PHP-FPM together
-CMD service nginx start && php-fpm
+CMD sed -i "s/\${PORT}/${PORT}/g" /etc/nginx/conf.d/default.conf && service nginx start && php-fpm
+
