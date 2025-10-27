@@ -7,19 +7,19 @@
         @foreach($videos as $video)
             <div class="video-card">
                 <div class="video-wrapper">
-                    @if(str_contains($video['url'], 'youtube'))
+                    <!-- @if(str_contains($video['url'], 'youtube')) -->
                         <iframe src="https://www.youtube.com/embed/{{ getYoutubeId($video['url']) }}" 
                                 frameborder="0" 
                                 allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
                                 allowfullscreen>
                         </iframe>
-                    @elseif(str_contains($video['url'], 'vimeo'))
+                    <!-- @elseif(str_contains($video['url'], 'vimeo'))
                         <iframe src="https://player.vimeo.com/video/{{ getVimeoId($video['url']) }}?title=0&byline=0&portrait=0" 
                                 frameborder="0" 
                                 allow="autoplay; fullscreen; picture-in-picture" 
                                 allowfullscreen>
                         </iframe>
-                    @endif
+                    @endif -->
                 </div>
 
                 <div class="video-info">
