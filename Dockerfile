@@ -40,7 +40,7 @@ WORKDIR /var/www
 COPY --from=build /var/www /var/www
 
 # Copy custom Nginx config
-COPY ./nginx.conf /etc/nginx/conf.d/default.conf
+COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 
 # Permissions
 RUN chown -R www-data:www-data storage bootstrap/cache \
