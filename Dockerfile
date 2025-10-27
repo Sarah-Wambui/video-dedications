@@ -46,8 +46,9 @@ COPY ./nginx/default.conf /etc/nginx/conf.d/default.conf
 RUN chown -R www-data:www-data storage bootstrap/cache \
     && chmod -R 775 storage bootstrap/cache
 
-# Expose HTTP port
-EXPOSE 80
+# Environment port from Railway
+ENV PORT=8080
+EXPOSE 8080
 
 # Start Nginx and PHP-FPM together
 CMD service nginx start && php-fpm
