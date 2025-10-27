@@ -87,17 +87,40 @@ document.addEventListener("DOMContentLoaded", function () {
             elements,
             confirmParams: {
                 return_url: "{{ route('dedicate.success') }}?ref={{ $dedication->order_id }}"
-            }
+            },
+            redirect: "if_required" // 🔥 IMPORTANT
         });
 
         if (result.error) {
+            // ❌ PAYMENT FAILED → Show Bootstrap tooltip
+            const tooltip = new bootstrap.Tooltip(payBtn, {
+                title: result.error.message || "Payment failed. Try again.",
+                trigger: 'manual'
+            });
+            tooltip.show();
+
             messageEl.style.display = 'block';
             messageEl.innerText = result.error.message;
-            payBtn.disabled = false;
-            payBtn.innerText = "Confirm and Pay";
-        }
-    });
 
+            payBtn.disabled = false;
+            payBtn.innerHTML = "Confirm and Pay";
+
+            // auto-hide tooltip
+            setTimeout(() => tooltip.hide(), 4000);
+            return;
+        }
+
+        // ✅ NO ERROR → Payment Completed (or will redirect if 3DS is needed)
+        if (result.paymentIntent && result.paymentIntent.status === "succeeded") {
+
+            payBtn.innerText = "Processing Payment..."; // nicer text
+
+            setTimeout(() => {
+                window.location.href = "{{ route('dedicate.success') }}?ref={{ $dedication->order_id }}";
+            }, 5000); // 5 second delay
+        }
+
+    });
 });
 </script>
 @endsection

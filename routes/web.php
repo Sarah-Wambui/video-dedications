@@ -25,4 +25,5 @@ Route::get('/dedicate/payment/{dedication:uuid}', [DedicationController::class, 
 Route::get('/dedicate/success', [DedicationController::class, 'success'])->name('dedicate.success');
 
 // Stripe webhook (no CSRF)
-Route::post('/webhook/stripe', [StripeWebhookController::class, 'handle'])->name('webhook.stripe');
+Route::post('/stripe/webhook', [StripeWebhookController::class, 'handle'])->name('webhook.stripe');
+

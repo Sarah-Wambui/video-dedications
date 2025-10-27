@@ -81,7 +81,7 @@ class DedicationController extends Controller
                 ]);
 
                 Log::info('PaymentIntent created', ['dedication_id' => $dedication->id, 'intent_id' => $intent->id]);
-                
+
                 $clientSecret = $intent->client_secret ?? null;
             }
         } catch (\Throwable $e) {
@@ -94,9 +94,12 @@ class DedicationController extends Controller
 
     public function success(Request $request)
     {
-        // Page 4: show thank-you
-        $orderId = $request->query('ref');
-        $dedication = Dedication::where('order_id', $orderId)->first();
-        return view('dedicate.success', compact('dedication', 'orderId'));
+        $ref = $request->query('ref');
+
+        $dedication = Dedication::where('order_id', $ref)->firstOrFail()->fresh();
+        
+        return view('dedicate.success', compact('dedication'));
+
     }
+
 }

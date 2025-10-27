@@ -305,7 +305,6 @@ img, video {
 }
 .btn-teal:hover {
     opacity: 0.9;
-    color: #fff;
     background: var(--brand-teal);
     color: #fff;
 }
@@ -535,4 +534,21 @@ img, video {
         height: 16px;
         margin-right: 0.5rem;
     }
+}
+
+.copy-tooltip {
+    position: absolute;
+    left: 70%;
+    transform: translateX(-50%);
+    background: #28a745;
+    color: #fff;
+    padding: 10px 15px;
+    border-radius: 5px;
+    font-size: 15px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity .3s ease;
+}
+.copy-tooltip.show {
+    opacity: 1;
 }

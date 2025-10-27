@@ -30,7 +30,10 @@
                 <p><strong>Receipt #:</strong> {{ $orderId ?? ($dedication->order_id ?? '-') }}</p>
 
                 <div class="mt-3">
-                    <button id="copy-share" class="btn-copy btn-custom">Copy share text</button>
+                    <button id="copy-share" class="btn-copy btn-custom">
+                        Copy share text
+                         <span id="copy-tooltip" class="copy-tooltip">Copied to clipboard!</span>
+                    </button>
                 </div>
 
                 <div class="mt-4 d-flex gap-2 justify-content-center actions">
@@ -49,19 +52,33 @@
     </div>
 </div>
 
-<!-- Copy Share Text Script -->
+@endsection
+@section('scripts')
 <script>
-    document.getElementById('copy-share').addEventListener('click', function() {
-        const text = `
-Dedication Type: {{ $dedication->dedication_type ?? '-' }}
-Honoree: {{ $dedication->honoree_name ?? '-' }}
-Note: {{ $dedication->short_note ?? '-' }}
-Receipt #: {{ $orderId ?? ($dedication->order_id ?? '-') }}
-        `.trim();
+    const copyBtn = document.getElementById('copy-share');
+    const tooltip = document.getElementById('copy-tooltip');
 
-        navigator.clipboard.writeText(text).then(() => {
-            alert('Share text copied to clipboard!');
+    if (copyBtn && tooltip) {
+        copyBtn.addEventListener('click', function() {
+            const text = `
+                Dedication Type: {{ $dedication->dedication_type ?? '-' }}
+                Honoree: {{ $dedication->honoree_name ?? '-' }}
+                Note: {{ $dedication->short_note ?? '-' }}
+                Receipt #: {{ $orderId ?? ($dedication->order_id ?? '-') }}
+            `.trim();
+
+            navigator.clipboard.writeText(text).then(() => {
+                tooltip.classList.add('show');
+                setTimeout(() => tooltip.classList.remove('show'), 1500);
+            });
         });
-    });
+    }
+
+    @if($dedication->status !== 'paid')
+        setTimeout(() => {
+            window.location.reload();
+        }, 3000);
+    @endif
 </script>
 @endsection
+
